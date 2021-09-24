@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>JS</title>
+		<!-- стили меню-->
+		<link rel="stylesheet" type="text/css" href="menu-style.css">
+		<!-- класс общих методов -->
+		<script type="text/javascript" src="Prototypes.js"></script>
+		<!-- класс методов главного меню -->
+		<script type="text/javascript" src="MainMenu.js"></script>
+		<!-- управление игрой -->
+		<script type="text/javascript" src="Game.js"></script>	
+	</head>
+
+	<body>
+
+		<div id="Game-name">Time Pressure</div>
+
+		<div id="Fon">
+			<div id="Fon1"></div>
+			<div id="Fon2"></div>
+			<div id="Fon3"></div>
+			<div id="Fon4"></div>
+		</div>
+
+		<!-- интро -->
+		<div id="Intro">
+			<div id="Intro1">Sanek's Game Entertainment</div>
+			<div id="Intro2">Presents</div>
+		</div>
+
+		<!-- главное меню -->
+		<div id="Main-menu">
+			<div id="Start-game" class="button">
+				<div class="ru">Начать игру</div>
+				<div class="en">Start Game</div>
+			</div>
+			<div id="Settings" class="button">
+				<div class="ru">Настройки</div>
+				<div class="en">Settings</div>
+			</div>
+			<div id="Exit" class="button">
+				<div class="ru">Выход</div>
+				<div class="en">Exit</div>
+			</div>
+		</div>
+
+		<!-- окно настроек -->
+		<div id="Window-settings">
+			<div id="Safe-settings" class="button">
+				<div class="ru">Принять</div>
+				<div class="en">Accept</div>
+			</div>
+			<div id="Default-settings" class="button">
+				<div class="ru">По умолчанию</div>
+				<div class="en">By default</div>
+			</div>
+
+			<div id="Menu-settings">
+				<div id="Name-settings">
+					<div class="ru">Настройки</div>
+					<div class="en">Settings</div>
+				</div>
+				<div id="Base-settings" class="button selected">
+					<div class="ru">Основные</div>
+					<div class="en">Basic</div>
+				</div>
+				<div id="Sound-settings" class="button">
+					<div class="ru">Звуковые</div>
+					<div class="en">Sound</div>
+				</div>
+				<div id="Key-settings" class="button">
+					<div class="ru">Управление</div>
+					<div class="en">Key control</div>
+				</div>
+			</div>
+
+			<div id="Settings-base">
+				
+				<div id="Change-language">
+					<div id="Language">
+						<div class="ru">Язык:</div>
+						<div class="en">Language:</div>
+					</div>
+					<div id="Ru-language" class="button selected">
+						<div class="ru">Русский</div>
+						<div class="en">Russian</div>
+					</div>
+					<div id="En-language" class="button">
+						<div class="ru">Английский</div>
+						<div class="en">English</div>
+					</div>
+				</div>
+				<div id="Change-fullscreen">
+					<div id="Fullscreen">
+						<div class="ru">Полноэкранный режим:</div>
+						<div class="en">Full-screen mode:</div>
+					</div>
+					<div id="On-fullscreen" class="button selected">
+						<div class="ru">Вкл</div>
+						<div class="en">On</div>
+					</div>
+					<div id="Off-fullscreen" class="button">
+						<div class="ru">Выкл</div>
+						<div class="en">Off</div>
+					</div>
+					<div id="Attention-window">
+						<div class="ru">Для изменения полноэкранного режима необходимо перезагрузить игру.</div>
+						<div class="en">You should restart the game to change the full-screen mode.</div>
+						<div id="Close-attention" class="button">OK</div>
+					</div>
+				</div>
+				<!-- <div id="Difficulty">
+					<div id="Name-difficulty">
+						<div class="ru">Сложность:</div>
+						<div class="en">Difficulty:</div>
+					</div>
+					<div id="Easy-difficulty" class="button">
+						<div class="ru">Легкая</div>
+						<div class="en">Ease</div>
+					</div>
+					<div id="Middle-difficulty" class="button selected">
+						<div class="ru">Среднея</div>
+						<div class="en">Middle</div>
+					</div>
+					<div id="Hard-difficulty" class="button">
+						<div class="ru">Сложная</div>
+						<div class="en">Hard</div>
+					</div>
+				</div> -->
+				<div id="Sanekmode">
+					<div id="Name-sanekmode">
+						<div class="ru">Режим Санька:</div>
+						<div class="en">Sanek's mode:</div>
+					</div>
+					<div id="On-sanekmode" class="button">
+						<div class="ru">Вкл</div>
+						<div class="en">On</div>
+					</div>
+					<div id="Off-sanekmode" class="button selected">
+						<div class="ru">Выкл</div>
+						<div class="en">Off</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="Settings-sound">
+
+				<div id="Change-music">
+					<div id="Name-music">
+						<div class="ru">Громкость музыки:</div>
+						<div class="en">Music volume:</div>
+					</div>
+					<div id="Volume-sound">
+						<div id="Change-musicvolume"></div>
+					</div>
+				</div>
+
+				<div id="Change-effects">
+					<div id="Name-effects">
+						<div class="ru">Громкость эффектов:</div>
+						<div class="en">Effects volume:</div>
+					</div>
+					<div id="Volume-effects">
+						<div id="Change-effectsvolume"></div>
+					</div>
+				</div>
+			</div>
+
+			<div id="Settings-key">
+				<div id="Window-changekey">
+					<div class="ru">Нажмите клавишу, чтобы ее назначить...</div>
+					<div class="en">Press a key to assign...</div>
+				</div>
+				<div id="Table-key">
+					<table>
+						<tr>
+							<th>
+								<div class="ru">Действие</div>
+								<div class="en">Action</div>
+							</th>
+							<th>
+								<div class="ru">Основные</div>
+								<div class="en">Basic</div>
+							</th>
+							<th>
+								<div class="ru">Дополнительные</div>
+								<div class="en">Additional</div>
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Движение вверх</div>
+								<div class="en">Move up</div>
+							</td>
+							<td key="W" class="button">W</td>
+							<td key="Up_arrow" class="button">ArrowUp</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Движение вниз</div>
+								<div class="en">Move down</div>
+							</td>
+							<td key="S" class="button">S</td>
+							<td key="Down_arrow" class="button">ArrowDown</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Движение вправо</div>
+								<div class="en">Move right</div>
+							</td>
+							<td key="D" class="button">D</td>
+							<td key="Right_arrow" class="button">ArrowRight</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Движение влево</div>
+								<div class="en">Move left</div>
+							</td>
+							<td key="A" class="button">A</td>
+							<td key="Left_arrow" class="button">ArrowLeft</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Бежать</div>
+								<div class="en">Run</div>
+							</td>
+							<td key="Shift" class="button">Shift</td>
+							<td key="ShiftDouble" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Взаимодействие</div>
+								<div class="en">Interaction</div>
+							</td>
+							<td key="E" class="button">E</td>
+							<td key="EDouble" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Выход в меню</div>
+								<div class="en">Exit to menu</div>
+							</td>
+							<td key="Escape" class="button">Escape</td>
+							<td key="EscapeDouble" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 1</div>
+								<div class="en">Skill 1</div>
+							</td>
+							<td key="1" class="button">1</td>
+							<td key="1Double" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 2</div>
+								<div class="en">Skill 2</div>
+							</td>
+							<td key="2" class="button">2</td>
+							<td key="2Double" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 3</div>
+								<div class="en">Skill 3</div>
+							</td>
+							<td key="3" class="button">3</td>
+							<td key="3Double" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 4</div>
+								<div class="en">Skill 4</div>
+							</td>
+							<td key="4" class="button">4</td>
+							<td key="4Double" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 5</div>
+								<div class="en">Skill 5</div>
+							</td>
+							<td key="5" class="button">5</td>
+							<td key="5Double" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 6</div>
+								<div class="en">Skill 6</div>
+							</td>
+							<td key="6" class="button">6</td>
+							<td key="6Double" class="button"></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ru">Способность 7</div>
+								<div class="en">Skill 7</div>
+							</td>
+							<td key="7" class="button">7</td>
+							<td key="7Double" class="button"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>	
+	</body>
+</html>

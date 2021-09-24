@@ -1,0 +1,346 @@
+/*шрифты*/
+@font-face {
+	font-family: 'Cuprum';
+	src: url('Fonts/RuslanDisplay.ttf');
+}
+
+/*карта*/
+html {
+	overflow: hidden;
+	cursor: url(Cursors/base.cur), auto;
+}
+
+/*параметры игрового мира*/
+body {
+	margin: 0;
+	position: relative;
+	font-family: 'Cuprum', 'cursive';
+	-webkit-user-select: none;
+	background: black;
+	color: #0D273A;
+}
+
+/*полоса прокрутки*/
+::-webkit-scrollbar-track { 
+	border-radius: 5px; 
+	background-color: #B6D0E3; 
+} 
+::-webkit-scrollbar-thumb { 
+	border-radius: 5px; 
+	background-color: #0D273A;  
+}
+::-webkit-scrollbar {
+	width: 11px; 
+}
+
+/*выбор языка*/
+.en {
+	display: none;
+}
+
+
+/*имя игры*/
+#Game-name {
+	position: absolute;
+	font-size: 120px;
+	justify-content: center;
+	width: 1536px;
+	top: 60px;
+	color: #B1EAF7;
+	text-shadow: 0 0 5px black;
+	display: none;
+}
+
+/*фон*/
+#Fon > div {
+	background-size: 100% 100%;
+	display: block;
+	width: 1536px;
+	height: 755px;
+	opacity: 0;
+}
+
+
+/*меню*/
+#Intro {
+	position: absolute;
+	color: white;
+	font-size: 40px;
+	top: 300px;
+	text-align: center;
+	margin: 0 auto;
+	width: 1536px;
+}
+#Intro > div {
+	text-transform: uppercase;
+	opacity: 0;
+}
+#Main-menu {
+	position: absolute;
+	left: 580px;
+    top: 220px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+    font-size: 43px;
+}
+.button {
+	border: 1px solid #B1EAF7;
+	border-radius: 20px;
+	text-align: center;
+	cursor: url(Cursors/pointer.cur), auto;
+	box-shadow: 2px 2px 5px #B1EAF7;
+	transition: background 0.2s linear, color 0.2s linear, box-shadow 0.2s linear;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #B6D0E3;
+}
+.button:hover {
+	box-shadow: none !important;
+}
+#Main-menu > div {
+	width: 370px;
+	height: 90px;
+	border: 2px solid #B1EAF7;
+	margin-bottom: 30px;
+	line-height: 95px;
+}
+
+
+/*настройки*/
+
+/*активны основные настройки по умолчанию*/
+.selected {
+	box-shadow: none !important;
+	background: #0D273A;
+	color: #B6D0E3;
+}
+
+#Window-settings {
+	width: 850px;
+	height: 553px;
+	position: absolute;
+	top: 100px;
+	left: 350px;
+	border: 1px solid #B1EAF7;
+	border-radius: 20px;
+	background: #8C97FF;
+	display: none;
+	box-shadow: 0px 0px 10px #B1EAF7;
+}
+#Menu-settings {
+	position: absolute;
+	width: 850px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	top: 50px;
+	font-size: 25px;
+	border: 1px solid #B1EAF7;
+	border-top: 2px solid #0D273A;
+	border-bottom: 2px solid #0D273A;
+	left: -1px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#Name-settings {
+	position: absolute;
+	top: -45px;
+	font-size: 40px;
+	color: #0D273A;
+}
+#Default-settings, #Safe-settings {
+	position: absolute;
+	top: 490px;
+	font-size: 20px;
+	width: 220px;
+}
+#Default-settings {
+	left: 20px;
+}
+#Safe-settings {
+	right: 20px;
+}
+#Base-settings, #Sound-settings, #Key-settings {
+	margin-left: 25px;
+	margin-right: 25px;
+	width: 210px;
+}
+#Language, #Change-music, #Fullscreen, #Change-effects {
+	position: absolute;
+	top: 160px;
+	font-size: 25px;
+	left: 40px;
+	width: 200px;
+	text-align: center;
+}
+#Fullscreen {
+	left: 15px;
+	width: 250px;
+}
+#Change-effects {
+	width: 200px;
+}
+#Ru-language, #En-language {
+	position: absolute;
+	top: 150px;
+	width: 165px;
+	font-size: 20px;
+}
+#Ru-language, #On-fullscreen, #On-sanekmode {
+	left: 330px;
+}
+#En-language, #Off-fullscreen, #Off-sanekmode {
+	left: 615px;
+}
+#Fullscreen, #Change-effects {
+	top: 250px;
+}
+#Attention-window {
+	position: absolute;
+	border: 2px solid #B1EAF7;
+	border-radius: 25px;
+	background: #8C97FF;
+	text-align: center;
+	padding: 5px;
+	width: 800px;
+	height: 115px;
+	top: 200px;
+	left: 20px;
+	font-size: 25px;
+	z-index: 1;
+	box-shadow: 0px 0px 10px #B1EAF7;
+	display: none;
+}
+#Close-attention {
+	width: 60px;
+	position: absolute;
+	top: 70px;
+	left: 364px;
+	text-align: center;
+}
+#Settings-sound {
+	display: none;
+}
+#Settings-key {
+	display: none;
+}
+#On-fullscreen, #Off-fullscreen {
+	position: absolute;
+	top: 250px;
+	width: 165px;
+	font-size: 20px;
+}
+#Name-sanekmode {
+	position: absolute;
+	top: 360px;
+	font-size: 25px;
+	width: 200px;
+	text-align: center;
+	left: 35px;
+}
+#Name-difficulty {
+	position: absolute;
+	top: 360px;
+	font-size: 25px;
+	width: 200px;
+	text-align: center;
+	left: 35px;
+}
+#On-sanekmode, #Off-sanekmode {
+	position: absolute;
+	top: 360px;
+	width: 165px;
+	font-size: 20px;
+}
+#Easy-difficulty, #Middle-difficulty, #Hard-difficulty {
+	position: absolute;
+	top: 350px;
+	width: 135px;
+	font-size: 20px;
+}
+#Easy-difficulty {
+	left: 270px;
+}
+#Middle-difficulty {
+	left: 470px;
+}
+#Hard-difficulty {
+	left: 670px;
+}
+#Volume-sound, #Volume-effects {
+	width: 450px;
+	height: 6px;
+	position: absolute;
+	top: 13px;
+	left: 280px;
+	background: #0D273A;
+	border-radius: 20px; 
+}
+#Change-musicvolume, #Change-effectsvolume {
+	border-radius: 50%;
+	background: #B6D0E3;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: -8px;
+	left: 0%;
+	cursor: url(Cursors/pointer.cur), auto;
+}
+#Table-key {
+	position: absolute;
+	top: 135px;
+	left: 30px;
+	width: 800px;
+	height: 330px;
+	overflow-y: scroll;
+	border: 2px solid black;
+	border-radius: 8px;
+}
+#Table-key table {
+	border-spacing: 10px;
+}
+
+#Table-key th, #Table-key td {
+	width: 240px;
+	border-radius: 20px;
+	box-shadow: 0 0 5px black;
+}
+#Table-key th {
+	border: 2px solid black;
+	font-size: 23px;
+	font-weight: normal;
+	height: 50px;
+}
+#Table-key td {
+	border: 1px solid black;
+	font-size: 20px;
+	height: 40px;
+	text-align: center;
+}
+#Table-key [key] {
+	font-size: 25px;
+}
+#Window-changekey {
+	position: absolute;
+	border: 2px solid black;
+	background: #8C97FF;
+	text-align: center;
+	padding-top: 114px;
+	width: 800px;
+	height: 216px;
+	top: 135px;
+	left: 30px;
+	font-size: 35px;
+	z-index: 1;
+	border-radius: 8px;
+	display: none;
+}
+
+
+
+
+
+

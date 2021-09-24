@@ -1,0 +1,752 @@
+/*шрифты*/
+@font-face {
+	font-family: 'RuslanDisplay';
+	src: url('Fonts/RuslanDisplay.ttf');
+}
+
+/*карта*/
+html {
+	overflow: hidden;
+	cursor: url(Cursors/base.cur), auto;
+	background: black;
+}
+
+body {
+	margin: 0;
+	font-family: 'RuslanDisplay';
+	-webkit-user-select: none;
+}
+
+/*параметры игрового мира*/
+#Body {
+	margin: 0;
+	position: relative;
+	opacity: 0;
+	transition: opacity 0.5s linear;
+}
+
+/*выбор языка*/
+.en {
+	display: none;
+}
+
+
+/*загрузка*/
+#Loading {
+	position: fixed;
+	z-index: 100000;
+	font-size: 50px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	width: 1536px;
+	top: 361px;
+}
+
+/*приветствие*/
+#Greeting {
+	position: fixed;
+	top: 220px;
+	left: 380px;
+	border: 2px solid #B1EAF7;
+	width: 675px;
+	height: 250px;
+	font-size: 25px;
+	border-radius: 20px;
+	z-index: 10001;
+	background: #8C97FF;
+	color: #0D273A;
+	box-shadow: 0px 0px 10px #B1EAF7;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	line-height: 30px;
+	display: none;
+}
+#Text-greeting {
+	text-align: justify;
+	text-indent: 20px;
+}
+#OK {
+	left: 272px;
+	width: 150px;
+	bottom: 5px;
+}
+
+
+
+/*полоса прокрутки*/
+::-webkit-scrollbar-track { 
+	border-radius: 5px; 
+	background-color: #32312e; 
+} 
+::-webkit-scrollbar-thumb { 
+	border-radius: 5px; 
+	background-color: white;  
+}
+::-webkit-scrollbar {
+	width: 11px; 
+}
+
+
+
+/*мини меню*/
+#Mini-menu, #Death-menu {
+	position: fixed;
+	top: 250px;
+	left: 600px;
+	border: 2px solid #B1EAF7;
+	width: 355px;
+	height: 240px;
+	font-size: 30px;
+	border-radius: 20px;
+	z-index: 10001;
+	background: #8C97FF;
+	color: #0D273A;
+	box-shadow: 0px 0px 10px #B1EAF7;
+	display: none;
+}
+#Death-menu {
+	z-index: 10002;
+}
+#Continue, #New-game {
+	top: 30px;
+}
+#Exit, #Exit-game {
+	bottom: 30px;
+}
+.button {
+	border: 1px solid #B1EAF7;
+	border-radius: 20px;
+	text-align: center;
+	cursor: url(Cursors/pointer.cur), auto;
+	box-shadow: 3px 3px 5px #475056;
+	transition: box-shadow 0.2s linear;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background: #B6D0E3;
+	width: 273px;
+	position: absolute;
+	left: 30px;
+	color: #0D273A;
+}
+.button:hover {
+	box-shadow: none !important;
+}
+
+
+/*замок ордена*/
+#OrdenCastle {
+	background-image: url(Images/Texture/OrdenCastle.png);
+	background-size: 100% 100%;
+	height: 3000px;
+	width: 3000px;
+	z-index: -1000;
+}
+
+/*интерфейс*/
+#Hero-interface>div {
+	background-repeat: no-repeat;
+	position: fixed;
+	z-index: 1000;
+}
+#Hero-interface div:not(#Ex-hero) {
+	background-size: 100% 100%;
+}
+
+/*способности героя*/
+#Icons-skills > div {
+	position: fixed;
+	top: 655px;
+	width: 165px;
+	transition: left 0.2s ease-in-out;
+}
+.window-skills {
+	position: absolute;
+	overflow: hidden;
+	width: 165px;
+}
+.open-window-skills {
+	position: absolute;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #6E8A88;
+	background-color: #35424A;
+	transition: top 0.3s ease-in-out;
+}
+.window-skills.twoElement {
+	top: -152px;
+	height: 152px;
+}
+.open-window-skills.twoElement {
+	top: 152px;
+}
+/*при двух или более убрать!!!*/
+.window-skills {
+	top: -81px;
+	height: 81px;
+}
+.open-window-skills {
+	top: 81px;
+}
+.add-skill {
+	position: absolute;
+	font-size: 75px;
+	width: 155px;
+	height: 71px;
+	text-align: center;
+	z-index: 1000;
+	background: black;
+	opacity: 0.8; 
+	cursor: url(Cursors/pointer.cur), auto;
+	transition: background 0.2s ease-in-out; 
+}
+.add-skill:hover {
+	background: initial;
+}
+.add-skills {
+	line-height: 27px;
+	transition: line-height 0.2s linear;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.name-school, .plus-skill {
+	text-align: center;
+}
+.name-school {
+	font-size: 22px;
+	text-shadow: 0 0 5px black;
+}
+.description, .description2, .description3 {
+	display: none !important;
+}
+.name-skill {
+	height: 37px;
+	text-align: center;
+	font-size: 14px;
+	text-shadow: 0 0 5px black;
+	display: none !important;
+}
+.skills-interface .name-skill {
+	position: absolute;
+	top: -27px;
+	width: 155px;
+}
+.skills-interface .name-level {
+	position: absolute;
+	text-align: center;
+	top: 45px;
+	left: 130px;
+	text-shadow: 0 0 5px black;
+	z-index: 1000;
+	font-size: 20px;
+}
+.skills-interface .move-left, .skills-interface .move-right {
+	position: absolute;
+	top: 42px;
+	font-size: 30px;
+	color: #8FABA9;
+	z-index: 1000;
+	cursor: url(Cursors/pointer.cur), auto;
+	text-shadow: 0 0 5px black;
+	transition: color 0.1s linear;
+}
+.skills-interface .move-right {
+	left: 85px;
+}
+.skills-interface .move-left {
+	left: 40px;
+}
+.move-right:hover, .move-left:hover {
+	color: white;
+}
+.upgrade-skill {
+	position: absolute;
+	z-index: 1000;
+	font-size: 55px;
+	top: 35px;
+	cursor: url(Cursors/pointer.cur), auto;
+	left: 5px;
+	text-shadow: 0 0 5px black;
+}
+.plus-skill {
+	font-size: 60px;
+	color: #A2BEBC;
+	cursor: url(Cursors/pointer.cur), auto;
+	transition: color 0.1s linear;
+	width: 30px;
+	margin: 0 auto;
+}
+.skills-interface > div {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 6px;
+	width: 155px;
+}
+.skills-interface div[id^=Cost] {
+	display: none;
+}
+#Icons-skills div[id^=Icon], .icon {
+	width: 155px;
+	height: 71px;
+	background-size: 100% 100%;
+	cursor: url(Cursors/pointer.cur), auto;
+}
+#Icons-skills div[id^=Icon] {
+	transition: filter 0.3s linear;
+}
+
+
+
+#Fire-school {
+	left: 1px;
+}
+#Fire-school .name-school, #Fire-school .plus-skill:hover, #Fire-school .add-skill, #Fire-school .name-skill, #Fire-school .name-level, #Fire-school .upgrade-skill  {
+	color: #FF3838;
+}
+
+
+#Water-school {
+	left: 161px;
+}
+#Water-school .name-school, #Water-school .plus-skill:hover, #Water-school .add-skill, #Water-school .name-skill, #Water-school .name-level, #Water-school .upgrade-skill  {
+	color: #4E4EFF;
+}
+
+#Earth-school {
+	left: 320px;
+}
+#Earth-school .name-school, #Earth-school .plus-skill:hover, #Earth-school .add-skill, #Earth-school .name-skill, #Earth-school .name-level, #Earth-school .upgrade-skill  {
+	color: #59FF59;
+}
+
+#Air-school {
+	left: 480px;
+}
+#Air-school .name-school, #Air-school .plus-skill:hover, #Air-school .add-skill, #Air-school .name-skill, #Air-school .name-level, #Air-school .upgrade-skill  {
+	color: skyblue;
+}
+
+#Force-school {
+	left: 640px;
+}
+#Force-school .name-school, #Force-school .plus-skill:hover, #Force-school .add-skill, #Force-school .name-skill, #Force-school .name-level, #Force-school .upgrade-skill  {
+	color: crimson;
+}
+
+#Spirit-school {
+	left: 800px;
+}
+#Spirit-school .name-school, #Spirit-school .plus-skill:hover, #Spirit-school .add-skill, #Spirit-school .name-skill, #Spirit-school .name-level, #Spirit-school .upgrade-skill  {
+	color: #F5F054;
+}
+
+#Control-school {
+	left: 959px;
+}
+#Control-school .name-school, #Control-school .plus-skill:hover, #Control-school .add-skill, #Control-school .name-skill, #Control-school .name-level, #Control-school .upgrade-skill  {
+	color: darkorchid;
+}
+
+#Icons-skills div[id$=Grey] {
+	filter: grayscale(100%);
+	position: static !important;
+}
+.icon {
+	overflow: hidden;
+	width: 0;
+	position: absolute;
+	top: 0;
+}
+#Description-skills {
+	border: 5px solid #6E8A88;
+	width: 250px;
+	background: #35424A;
+	display: none;
+	text-align: center;
+	color: #B5D1CF;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	line-height: 25px;
+	z-index: 1001 !important;
+}
+#Description-name {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+#Description-skill {
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+#Need-mp {
+	font-size: 17px;
+	color: #05C1E1;
+	display: flex;
+	justify-content: center;
+}
+#Cost-mp {
+	margin-left: 5px;
+}
+#New-level {
+	font-size: 20px;
+	display: none;
+	justify-content: center;
+}
+#Next-level {
+	font-size: 20px;
+	margin-right: 5px;
+}
+
+/*характеристики героя*/
+#Hp-hero, #Mp-hero, #Ep-hero {
+	width: 328px;
+	left: 65px;
+	display: flex;
+	justify-content: center;
+}
+#Hp-hero {
+	top: 26px;
+	height: 12px;
+}
+#Mp-hero {
+	top: 61px;
+	height: 12px;
+}
+#Ep-hero {
+	top: 97px;
+	height: 13px;
+}
+#Plus-hp, #Plus-mp, #Plus-ep  {
+	position: absolute;
+	right: -20px;
+	top: -13px;
+	font-size: 42px;
+	cursor: url(Cursors/pointer.cur), auto;
+	display: none;
+	text-shadow: 0px 0px 5px black;
+}
+#Ex-hero {
+	display: flex;
+	justify-content: center;
+	width: 523px;
+	top: 68px;
+	height: 13px;
+	left: 993px;
+	background-size: 0% 100%;
+	color: #E0E6AF;
+	transition: background-size 0.5s linear;
+	text-shadow: 0px 0px 5px black;
+}
+#Amount-hp, #Amount-mp, #Amount-ep {
+	font-size: 16px;
+	position: absolute;
+	top: -1px;
+	text-shadow: 0px 0px 5px black;
+	transition: color 0.1s linear;
+}
+#Amount-hp, #Plus-hp {
+	color: #FF0F1F;
+}
+#Amount-mp, #Plus-mp {
+	color: #1C69EA;
+}
+#Amount-ep, #Plus-ep {
+	color: #22EC00;
+}
+#Amount-ex {
+	font-size: 15px;
+	position: absolute;
+}
+#Amount-level {
+	border: 2px solid #5F7879;
+	width: 35px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 25px;
+	background: #1A2329;
+	position: absolute;
+	top: -45px;
+	text-shadow: 0 0 5px black;
+}
+#Dialog {
+	top: 480px;
+	left: 395px;
+	width: 710px;
+	height: 140px;
+	display: none;
+	text-align: justify;
+	transition: opacity 0.3s linear;
+	color: white;
+	filter: brightness(75%);
+	text-align: center;
+	text-shadow: 0 0 5px black;
+}
+#Text {
+	overflow-y: auto;
+	position: absolute;
+	margin: 0;
+	top: 20px;
+	left: 30px;
+	width: 650px;
+	height: 70px;
+	padding-right: 25px;
+	background-size: 100% 100%;
+	font-size: 20px;
+}
+#Answer1:not([class]), #Answer2:not([class]) {
+	font-size: 15px;
+	position: absolute;
+	top: 70px;
+	width: 250px;
+	border: 2px solid #C3C3C3;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 20px;
+	background: #283237;
+	transition: 0.2s box-shadow linear, 0.2s background linear;
+	cursor: url(Cursors/pointer.cur), auto;
+}
+#Answer1:not([class]) {
+	left: 50px;
+	color: red;
+	border-color: red;
+	box-shadow: 2px 2px 5px red;
+}
+#Answer2:not([class]) {
+	right: 50px;
+	color: #05C1E1;
+	border-color: #05C1E1;
+	box-shadow: 2px 2px 5px #05C1E1;
+}
+#Answer1:not([class]):hover, #Answer2:not([class]):hover {
+	box-shadow: none;
+	background: #313D45;
+}
+.cost-hpElixir, .cost-manaElixir {
+	display: inline;
+}
+#Name-evolutionTimer {
+	top: 600px;
+	left: 1150px;
+	font-size: 30px;
+	width: 385px;
+	text-align: center;
+	text-shadow: 0 0 5px black;
+	color: #AF4733;
+}
+#Evolution-timer {
+	top: 650px;
+	left: 1150px;
+	font-size: 50px;
+	width: 385px;
+	text-align: center;
+	text-shadow: 0 0 5px black;
+	color: #E0E6AF;
+}
+#Sp-hero {
+	top: 732px;
+	width: 1123px;
+	font-size: 22px;
+	color: #BEDAD8;
+	display: flex;
+	justify-content: center;
+	transition: filter 0.2s linear;
+}
+#Amount-sp {
+	margin-left: 5px;
+}
+
+
+
+
+
+
+
+/*моп*/
+#Mop .monster {
+	background-repeat: no-repeat;
+	width: 200px;
+	height: 265px;
+	opacity: 0;
+}
+#Mop {
+	position: absolute;
+}
+
+
+/*ария*/
+#Arrey .monster {
+	background-repeat: no-repeat;
+	width: 200px;
+	height: 300px;
+	opacity: 0;
+}
+#Arrey {
+	position: absolute;
+}
+
+
+/*воин*/
+#Warrior {
+	position: absolute;
+	top: 2100px;
+	left: 1800px;
+	width: 400px;
+	height: 400px;
+	background-size: 300px;
+	background-repeat: no-repeat;
+	background-image: url('Images/Texture/Warrior.png'); 
+	opacity: 0;
+}
+
+/*герой*/
+#Main-character {
+	position: absolute;
+	transition: filter 0.2s linear;
+}
+.character {
+	background-repeat: no-repeat;
+	width: 110px;
+	height: 140px;
+	background-size: 110px;
+	opacity: 0;
+}
+#Hero-strikes {
+	position: absolute;
+	top: 50px;
+	left: -5px;
+	transform-origin: 53% 40%;
+}
+
+
+
+
+/*объекты*/
+#Grass div, #Random-grass div {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	background-size: 400px;
+	z-index: -100;
+	background-repeat: no-repeat;
+}
+#Static-objects div {
+	background-repeat: no-repeat;
+	position: absolute;
+	transform-origin: top left;
+	transition: 0.2s linear;
+}
+#PhysicCircle, #PhysicRectangle{
+	position: absolute;
+	border: 3px solid red;
+	z-index: 10000;
+	top: -10px;
+}
+#PhysicCircle{
+	border-radius: 50%;
+}
+#Gates > div {
+	width: 1003px;
+	height: 192px;
+	top: 14px;
+	left: 1318px;
+	opacity: 0;
+}
+
+
+
+/*кровь*/
+.mop_blood, .hero_blood, .arrey_blood {
+	position: absolute;
+	background-size: 200px;
+	width: 200px;
+	height: 200px;
+	background-repeat: no-repeat;
+	opacity: 0;
+}
+.mop_blood, .arrey_blood {
+	z-index: -2;
+	left: -25px;
+	top: 60px;
+}
+.hero_blood {
+	z-index: -1;
+	top: 35px;
+	left: -30px;
+}
+
+
+/*персонажи*/
+
+
+
+/*способности героя*/
+#Hero-effects > div {
+	position: absolute;
+	z-index: 999;
+}
+.effect {
+	background-repeat: no-repeat;
+	opacity: 0;
+}
+#Hero-effects #Fireball {
+	transform-origin: 0% 50%;
+	filter: drop-shadow(0px 0px 10px #D56701);
+}
+#Hero-effects #Fireball .effect {
+	width: 40px;
+	height: 85px;
+	background-size: 40px;
+}
+#Hero-effects #Explosion .effect {
+	width: 180px;
+	height: 180px;
+	background-size: 180px;
+	filter: drop-shadow(0px 0px 20px #F05400) opacity(85%);
+}
+#Hero-effects #Fierytrail .effect {
+	width: 180px;
+	height: 180px;
+	background-size: 200px;
+}
+#Hero-effects #Soullink {
+	transform-origin: 5% 50%;
+	overflow: hidden;
+}
+#Hero-effects #Soullink .effect {
+	width: 301px;
+	height: 18px;
+}
+#Hero-effects #Icelance {
+	transform-origin: 0% 30%;
+	filter: drop-shadow(0px 0px 10px #6EC3EB);
+}
+#Hero-effects #Icelance .effect {
+	width: 40px;
+	height: 150px;
+	background-size: 50px;
+}
+
+
+/*диалоги*/
+#Dialogs {
+	display: none;
+}
+
+
+
+
+
+
+

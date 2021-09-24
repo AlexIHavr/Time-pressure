@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>JS</title>
+		<!-- основные стили -->
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+		<!-- класс общих методов -->
+		<script type="text/javascript" src="Prototypes.js"></script>
+		<!-- класс герой -->
+		<script type="text/javascript" src="Hero.js"></script>
+		<!-- класс способностей героя -->
+		<script type="text/javascript" src="HeroSkills.js"></script>
+		<!-- класс интерфейса -->
+		<script type="text/javascript" src="HeroInterface.js"></script>
+		<!-- класс ударов героя -->
+		<script type="text/javascript" src="HeroStrikes.js"></script>
+		<!-- класс статических объектов -->
+		<script type="text/javascript" src="StaticObjects.js"></script>
+		<!-- класс существ -->
+		<script type="text/javascript" src="Creatures.js"></script>
+		<!-- класс существа - моп -->
+		<script type="text/javascript" src="Mop.js"></script>
+		<!-- класс существа - ария -->
+		<script type="text/javascript" src="Arrey.js"></script>
+		<!-- управление игрой -->
+		<script type="text/javascript" src="Game.js"></script>
+	</head>
+
+	<body>
+
+		<div id="Loading">
+			<div class='ru'>Загрузка...</div>
+			<div class='en'>Loading...</div>
+		</div>
+
+		<!-- скрипт на загрузку -->
+		<script>
+			let html = document.querySelector('html');
+
+			Prototypes.setSizeDOMElements([
+				{
+					arr_elements: document.querySelectorAll('#Loading'), 
+					styles: {
+						'top': 1, 
+						'width': 1, 
+						'font-size': 1, 
+						'border-radius': 1
+					}
+				}
+			]);
+			Prototypes.setLanguageGame();
+		</script>
+
+		<div id="Body">
+
+			<div id="Greeting">
+				<div id="Text-greeting">
+					<div class="ru">Добро пожаловать в демо-версию Time Pressure! Здесь тебе предстоит пройти 10 волн, после которых ты сможешь войти в замок. Помни, не трать время зря, здесь оно играет против тебя, удачи!</div>
+					<div class="en">Welcome to the Time Pressure demo! Beat 10 waves to be able to enter the Castle. Remember, time is crucial, use it wisely, good luck!</div>
+				</div>
+				<div id="OK" class="button">ОК</div>
+			</div>
+
+			<div id="OrdenCastle" class="location">
+
+				<!-- интерфейс героя -->
+				<div id="Hero-interface">
+
+					<div id="Interface"></div>
+
+					<!-- мини-меню -->
+					<div id="Mini-menu" no-img>
+						<div id="Continue" class="button">
+							<div id="ReturnToGame" class="ru">Продолжить</div>
+							<div id="ReturnToGame" class="en">Continue</div>
+						</div>
+						<div id="Exit" class="button">
+							<div id="ExitFromGame" class="ru">Выйти в меню</div>
+							<div id="ExitFromGame" class="en">Exit to menu</div>
+						</div>
+					</div>
+
+					<!-- мини-меню при смерти героя -->
+					<div id="Death-menu" no-img>
+						<div id="New-game" class="button">
+							<div id="Start-again" class="ru">Начать заново</div>
+							<div id="Start-again" class="en">Start again</div>
+						</div>
+						<div id="Exit-game" class="button">
+							<div id="ExitFromGame" class="ru">Выйти в меню</div>
+							<div id="ExitFromGame" class="en">Exit to menu</div>
+						</div>
+					</div>
+					
+					<!-- иконки для способностей героя -->
+					<div id="Icons-skills" no-img>
+			
+						<!-- школа огня -->
+						<div id="Fire-school">
+
+							<!-- окно способностей данной школы -->
+							<div id="Window-fire" class="window-skills twoElement">
+
+								<div id="Fire-window" class="open-window-skills twoElement">
+									
+									<!-- огненный шар -->
+									<div id="Fireball">
+										<div class='ru name-skill'>Огненный шар</div>
+										<div class='en name-skill'>Fireball</div>
+										<div id="Add-fireball" class='add-skill'>+</div>
+										<div id="IconFireball" class="Fireball"></div>
+										<div class='icon'>
+											<div id="IconFireballGrey" class="Fireball"></div>
+										</div>
+									</div>
+					
+									<!-- огненный след -->
+									<div id="Fierytrail">
+										<div class='ru name-skill'>Огненный след</div>
+										<div class='en name-skill'>Fiery trail</div>
+										<div id="Add-fierytrail" class='add-skill'>+</div>
+										<div id="IconFierytrail" class="Fierytrail"></div>
+										<div class='icon'>
+											<div id="IconFierytrailGrey" class="Fierytrail"></div>
+										</div>
+									</div>
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа огня</div>
+									<div class="en">Fire School</div>
+								</div>
+			
+								<div id="Fire-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Fire-skills" class="skills-interface">
+
+								<!-- огненный шар -->
+								<div id="Fireball">
+									<div id="IconFireball" class="selected-skill Fireball"></div>
+									<div id="Move-left" class='move-left' school='Fire'>&lArr;</div>
+									<div id="Move-right" class='move-right' school='Fire'>&rArr;</div>
+
+									<div id="Cost-Fireball">60</div>
+
+									<div class='ru name-skill'>Огненный шар</div>
+									<div class='en name-skill'>Fireball</div>
+									<div class='ru description'>
+										Вместо атак вы начинаете запускать сгустки огня на протяжении 7 секунд, поражающие первого попавшего на пути противника и цели неподалёку от него.
+									</div>
+									<div class='en description'>
+										Your basic attacks are replaced with fire projectiles for 7 seconds that hits first target on its way and enemies around.
+									</div>
+									<div class='ru description2'>
+										Наносимый урон огнем увеличиваются на 50%, а радиус взрыва на 10%.
+									</div>
+									<div class='en description2'>
+										Fire damage is increased by 50% and blast radius is increased by 10%.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-fireball" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconFireballGrey" class="Fireball"></div>
+									</div>
+								</div>
+
+								<!-- огненный след -->
+								<div id="Fierytrail">
+									<div id="IconFierytrail" class="selected-skill Fierytrail"></div>
+									<div id="Move-left" class='move-left' school='Fire'>&lArr;</div>
+									<div id="Move-right" class='move-right' school='Fire'>&rArr;</div>
+
+									<div id="Cost-Fierytrail">100</div>
+
+									<div class='ru name-skill'>Огненный след</div>
+									<div class='en name-skill'>Fiery trail</div>
+									<div class='ru description'>
+										В течении 10 секунд вы оставляете позади себя след из огня, который поджигает врагов и отталкивает их.
+									</div>
+									<div class='en description'>
+										Next 10 seconds you will be leaving fiery trail that will ignite enemies and push them back.
+									</div>
+									<div class='ru description2'>
+										Наносимый урон от поджога увеличивается на 50%, а ваша скорость передвижения на 10%.
+									</div>
+									<div class='en description2'>
+										Fiery damage is increased by 50% and your movement speed by 10%.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-fierytrail" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconFierytrailGrey" class="Fierytrail"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- школа воды -->
+						<div id="Water-school">
+							
+							<!-- окно способностей данной школы -->
+							<div id="Window-water" class="window-skills">
+
+								<div id="Water-window" class="open-window-skills">
+									
+									<!-- ледяное копье -->
+									<div id="Icelance">
+										<div class='ru name-skill'>Ледяное копье</div>
+										<div class='en name-skill'>Ice lance</div>
+										<div id="Add-icelance" class='add-skill'>+</div>
+										<div id="IconIcelance"  class="Icelance"></div>
+										<div class='icon'>
+											<div id="IconIcelanceGrey" class="Icelance"></div>
+										</div>
+									</div>
+					
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа воды</div>
+									<div class="en">Water School</div>
+								</div>
+			
+								<div id="Water-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Water-skills" class="skills-interface">
+
+								<!-- ледяное копье -->
+								<div id="Icelance">
+									<div id="IconIcelance" class="selected-skill Icelance"></div>
+									<div id="Move-left" class='move-left' school='Water'>&lArr;</div>
+									<div id="Move-right"class='move-right' school='Water'>&rArr;</div>
+
+									<div id="Cost-Icelance">30</div>
+
+									<div class='ru name-skill'>Ледяное копье</div>
+									<div class='en name-skill'>Icelance</div>
+									<div class='ru description'>
+										Вы запускаете ледяное копьё, пробивающее противников насквозь. За каждого пробитого противника урон снаряда падает.
+									</div>
+									<div class='en description'>
+										You launch an ice projectile that pierces enemy, damage is redused with every hit.
+									</div>
+									<div class='ru description2'>
+										Прочность ледяного копья и наносимый его урон становятся больше на 50%.
+									</div>
+									<div class='en description2'>
+										The ice lance durability and its damage is increased by 50%.
+									</div>
+									<div class='ru description3'>
+										Вы запускаете два ледяных копья вместо одного.
+									</div>
+									<div class='en description3'>
+										You launch two ice projectiles instead of one.
+									</div>
+									
+									<div id="Upgrade-icelance" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconIcelanceGrey" class="Icelance"></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!-- школа земли -->
+						<div id="Earth-school">
+							
+							<!-- окно способностей данной школы -->
+							<div id="Window-earth" class="window-skills">
+
+								<div id="Earth-window" class="open-window-skills">
+									
+									<!-- регенерация -->
+									<div id="Regen">
+										<div class='ru name-skill'>Регенерация</div>
+										<div class='en name-skill'>Regeneration</div>
+										<div id="Add-regen" class='add-skill'>+</div>
+										<div id="IconRegen" class="Regen"></div>
+										<div class='icon'>
+											<div id="IconRegenGrey" class="Regen"></div>
+										</div>
+									</div>
+					
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа земли</div>
+									<div class="en">Earth School</div>
+								</div>
+			
+								<div id="Earth-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Earth-skills" class="skills-interface">
+
+								<!-- регенерация -->
+								<div id="Regen">
+									<div id="IconRegen" class="selected-skill Regen"></div>
+									<div id="Move-left" class='move-left' school='Earth'>&lArr;</div>
+									<div id="Move-right" class='move-right' school='Earth'>&rArr;</div>
+
+									<div id="Cost-Regen">70</div>
+
+									<div class='ru name-skill'>Регенерация</div>
+									<div class='en name-skill'>Regeneration</div>
+									<div class='ru description'>
+										Вы начинаете быстро восстанавливать жизни, до тех пор, пока вы не получите урон. При этом ваша скорость передвижения падает на 50%.
+									</div>
+									<div class='en description'>
+										You start rapidly regenerting health until you take damage. At the same time your movement speed is decreased by 50%.
+									</div>
+									<div class='ru description2'>
+										Ваша скорость регенерации увеличивается на 50%, а скорость передвижения падает на 10%.
+									</div>
+									<div class='en description2'>
+										Your regeneration speed is increased by 50% and your movement speed is decreased by 10%.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-regen" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconRegenGrey" class="Regen"></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!-- школа воздуха -->
+						<div id="Air-school">
+							
+							<!-- окно способностей данной школы -->
+							<div id="Window-air" class="window-skills">
+
+								<div id="Air-window" class="open-window-skills">
+									
+									<!-- рывок -->
+									<div id="Charge">
+										<div class='ru name-skill'>Порыв ветра</div>
+										<div class='en name-skill'>Wind blow</div>
+										<div id="Add-charge" class='add-skill'>+</div>
+										<div id="IconCharge" class="Charge"></div>
+										<div class='icon'>
+											<div id="IconChargeGrey" class="Charge"></div>
+										</div>
+									</div>
+					
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа воздуха</div>
+									<div class="en">Air School</div>
+								</div>
+			
+								<div id="Air-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Air-skills" class="skills-interface">
+
+								<!-- рывок -->
+								<div id="Charge">
+									<div id="IconCharge" class="selected-skill Charge"></div>
+									<div id="Move-left" class='move-left' school='Air'>&lArr;</div>
+									<div id="Move-right" class='move-right' school='Air'>&rArr;</div>
+
+									<div id="Cost-Charge">20</div>
+
+									<div class='ru name-skill'>Порыв ветра</div>
+									<div class='en name-skill'>Wind blow</div>
+									<div class='ru description'>
+										Вы делает резкий рывок в указанном направлении, который расталкивает противников и оглушает их на 6 секунд.
+									</div>
+									<div class='en description'>
+										You dash in chosen direction pushing enemies away and stunning them for 6 seconds.
+									</div>
+									<div class='ru description2'>
+										Время оглушения увеличивается на 50%, а время перезарядки способности уменьшается в два раза.
+									</div>
+									<div class='en description2'>
+										Stun duration is increased by 50% and reload time is halved.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-charge" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconChargeGrey" class="Charge"></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!-- школа силы -->
+						<div id="Force-school">
+							
+							<!-- окно способностей данной школы -->
+							<div id="Window-force" class="window-skills">
+
+								<div id="Force-window" class="open-window-skills">
+									
+									<!-- рывок -->
+									<div id="Rage">
+										<div class='ru name-skill'>Ярость</div>
+										<div class='en name-skill'>Rage</div>
+										<div id="Add-rage" class='add-skill'>+</div>
+										<div id="IconRage" class="Rage"></div>
+										<div class='icon'>
+											<div id="IconRageGrey" class="Rage"></div>
+										</div>
+									</div>
+					
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа силы</div>
+									<div class="en">Force School</div>
+								</div>
+			
+								<div id="Force-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Force-skills" class="skills-interface">
+
+								<!-- ярость -->
+								<div id="Rage">
+									<div id="IconRage" class="selected-skill Rage"></div>
+									<div id="Move-left" class='move-left' school='Force'>&lArr;</div>
+									<div id="Move-right" class='move-right' school='Force'>&rArr;</div>
+
+									<div id="Cost-Rage">40</div>
+
+									<div class='ru name-skill'>Ярость</div>
+									<div class='en name-skill'>Rage</div>
+									<div class='ru description'>
+										Вы наполняетесь гневом, что увеличивает вашу скорость атаки и урон на 10 секунд.
+									</div>
+									<div class='en description'>
+										You fill yourself with anger increasing your attack speed and damage for 10 seconds.
+									</div>
+									<div class='ru description2'>
+										Бонус к урону увеличивается на 50%, а бонус к скорости атаки на 30%.
+									</div>
+									<div class='en description2'>
+										Damage bonus is increased by 50% and your attack speed bonus is increased by 30%.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-rage" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconRageGrey" class="Rage"></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!-- школа духа -->
+						<div id="Spirit-school">
+							
+							<!-- окно способностей данной школы -->
+							<div id="Window-spirit" class="window-skills">
+
+								<div id="Spirit-window" class="open-window-skills">
+									
+									<!-- кража души -->
+									<div id="Soulsteel">
+										<div class='ru name-skill'>Похищение души</div>
+										<div class='en name-skill'>Soul stealling</div>
+										<div id="Add-soulsteel" class='add-skill'>+</div>
+										<div id="IconSoulsteel" class="Soulsteel"></div>
+										<div class='icon'>
+											<div id="IconSoulsteelGrey" class="Soulsteel"></div>
+										</div>
+									</div>
+					
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа духа</div>
+									<div class="en">Spirit School</div>
+								</div>
+			
+								<div id="Spirit-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Spirit-skills" class="skills-interface">
+
+								<!-- кража души -->
+								<div id="Soulsteel">
+									<div id="IconSoulsteel" class="selected-skill Soulsteel"></div>
+									<div id="Move-left" class='move-left' school="Spirit">&lArr;</div>
+									<div id="Move-right" class='move-right' school="Spirit">&rArr;</div>
+
+									<div id="Cost-Soulsteel">70</div>
+
+									<div class='ru name-skill'>Похищение души</div>
+									<div class='en name-skill'>Soul stealling</div>
+									<div class='ru description'>
+										На протяжении 3 секунд ваши основные атаки создают духовную нить с противником, которая будет перекачивать жизненную силу вам, до тех пор пока вы не отойдёте от них слишком далеко.
+									</div>
+									<div class='en description'>
+										For 3 seconds your basic attacks create a spiritual link with the enemy that will give the life force to you until you get too far away from them.
+									</div>
+									<div class='ru description2'>
+										Скорость кражи жизненный сил увеличивается на 50%, а дальность ее действия на 30%.
+									</div>
+									<div class='en description2'>
+										Stealing life is increased by 50% and its distance is increased by 30%.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-soulsteel" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconSoulsteelGrey" class="Soulsteel"></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!-- школа контроля -->
+						<div id="Control-school">
+							
+							<!-- окно способностей данной школы -->
+							<div id="Window-control" class="window-skills">
+
+								<div id="Control-window" class="open-window-skills">
+									
+									<!-- остановка времени -->
+									<div id="Stoptime">
+										<div class='ru name-skill'>Контроль времени</div>
+										<div class='en name-skill'>Time control</div>
+										<div id="Add-stoptime" class='add-skill'>+</div>
+										<div id="IconStoptime" class="Stoptime"></div>
+										<div class='icon'>
+											<div id="IconStoptimeGrey" class="Stoptime"></div>
+										</div>
+									</div>
+					
+								</div>
+				
+							</div>
+
+							<!-- название и добавление школы -->
+							<div class="add-skills">
+								<div class="name-school">
+									<div class="ru">Школа контроля</div>
+									<div class="en">Control School</div>
+								</div>
+			
+								<div id="Control-school-plus" class="plus-skill">+</div>
+							</div>
+			
+
+							<!-- способности на интерфейсе -->
+							<div id="Control-skills" class="skills-interface">
+
+								<!-- остановка времени -->
+								<div id="Stoptime">
+									<div id="IconStoptime" class="selected-skill Stoptime"></div>
+									<div id="Move-left" class='move-left' school="Control">&lArr;</div>
+									<div id="Move-right" class='move-right' school="Control">&rArr;</div>
+
+									<div id="Cost-Stoptime">50</div>
+
+									<div class='ru name-skill'>Контроль времени</div>
+									<div class='en name-skill'>Time control</div>
+									<div class='ru description'>
+										Через 3 секунды время заморозится для всех, кроме вас.
+									</div>
+									<div class='en description'>
+										Time is frozen after 3 seconds.
+									</div>
+									<div class='ru description2'>
+										Время действия способности увеличивается на 50%.
+									</div>
+									<div class='en description2'>
+										The duration is increased by 50%.
+									</div>
+									<div class='ru description3'></div>
+									<div class='en description3'></div>
+									
+									<div id="Upgrade-stoptime" class='upgrade-skill'>+</div>
+									<div class='name-level'>&#8544;</div>
+									<div class='icon'>
+										<div id="IconStoptimeGrey" class="Stoptime"></div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+
+					</div>
+
+					<!-- описание способностей -->
+					<div id="Description-skills" no-img>
+						
+						<div id='New-level'>
+							<div id="Next-level"></div>
+							<div class="ru">уровень</div>
+							<div class="en">level</div>
+						</div>
+						<div id='Description-name'></div>
+						<div id='Description-skill'></div>
+						<div id='Need-mp'>
+							<div class="ru">Требует маны:</div>
+							<div class="en">Mana cost:</div>
+							<div id="Cost-mp"></div>
+						</div>
+					</div>
+
+					<!-- характеристики способностей -->
+					<div id="Hp-hero">
+						<div id="Amount-hp"></div>
+						<div id="Plus-hp" class="plus-points">+</div>
+					</div>
+					<div id="Mp-hero">
+						<div id="Amount-mp"></div>
+						<div id="Plus-mp" class="plus-points">+</div>
+					</div>
+					<div id="Ep-hero">
+						<div id="Amount-ep"></div>
+						<div id="Plus-ep" class="plus-points">+</div>
+					</div>
+					<div id="Ex-hero">
+						<div id="Amount-ex"></div>
+						<div id="Amount-level">1</div>
+					</div>
+					<div id="Dialog">
+						<p id="Text"></p>
+						<div id="Answer1">
+							<div id="Answer1" class="ru">Купить зелье здоровья за <div id="Answer1" class="cost-hpElixir">15</div> опыта</div>
+							<div id="Answer1" class="en">Buy a health potion for <div id="Answer1" class="cost-hpElixir">15</div> experience</div>
+						</div>
+						<div id="Answer2">
+							<div id="Answer2" class="ru">Купить зелье маны за <div id="Answer2" class="cost-manaElixir">30</div> опыта</div>
+							<div id="Answer2" class="en">Buy a mana potion for <div id="Answer2" class="cost-manaElixir">30</div> experience</div>
+						</div>
+					</div>
+					<div id="Name-evolutionTimer" no-img>
+						<div class="ru">Время поспешить:</div>
+						<div class="en">Time to rush:</div>
+					</div>
+					<div id="Evolution-timer" no-img>00:00</div>
+					<div id="Sp-hero" no-img>
+						<div class="ru">Очки способностей: </div>
+						<div class="en">Skill points: </div>
+						<div id="Amount-sp">1</div>
+					</div>
+				</div>
+
+
+
+				<!-- Основной персонаж -->
+				<div id="Main-character">
+					
+					<div id="Hero">
+						<div id="Front-walk">
+							<div id="Hero-front-stands" class="character"></div>
+							<div>
+								<div id="Hero-front-walk1" class="character"></div>
+								<div id="Hero-front-stands1" class="character"></div>
+								<div id="Hero-front-walk2" class="character"></div>
+								<div id="Hero-front-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Back-walk">
+							<div id="Hero-back-stands" class="character"></div>
+							<div>
+								<div id="Hero-back-walk1" class="character"></div>
+								<div id="Hero-back-stands1" class="character"></div>
+								<div id="Hero-back-walk2" class="character"></div>
+								<div id="Hero-back-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Right-walk">
+							<div id="Hero-right-stands" class="character"></div>
+							<div>
+								<div id="Hero-right-walk1" class="character"></div>
+								<div id="Hero-right-stands1" class="character"></div>
+								<div id="Hero-right-walk2" class="character"></div>
+								<div id="Hero-right-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Left-walk">
+							<div id="Hero-left-stands" class="character"></div>
+							<div>
+								<div id="Hero-left-walk1" class="character"></div>
+								<div id="Hero-left-stands1" class="character"></div>
+								<div id="Hero-left-walk2" class="character"></div>
+								<div id="Hero-left-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Upleft-diagonal">
+							<div id="Upleft-diagonal-stands" class="character"></div>
+							<div>
+								<div id="Upleft-diagonal-walk1" class="character"></div>
+								<div id="Upleft-diagonal-stands1" class="character"></div>
+								<div id="Upleft-diagonal-walk2" class="character"></div>
+								<div id="Upleft-diagonal-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Upright-diagonal">
+							<div id="Upright-diagonal-stands" class="character"></div>
+							<div>
+								<div id="Upright-diagonal-walk1" class="character"></div>
+								<div id="Upright-diagonal-stands1" class="character"></div>
+								<div id="Upright-diagonal-walk2" class="character"></div>
+								<div id="Upright-diagonal-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Downleft-diagonal">
+							<div id="Downleft-diagonal-stands" class="character"></div>
+							<div>
+								<div id="Downleft-diagonal-walk1" class="character"></div>
+								<div id="Downleft-diagonal-stands1" class="character"></div>
+								<div id="Downleft-diagonal-walk2" class="character"></div>
+								<div id="Downleft-diagonal-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Downright-diagonal">
+							<div id="Downright-diagonal-stands" class="character"></div>
+							<div>
+								<div id="Downright-diagonal-walk1" class="character"></div>
+								<div id="Downright-diagonal-stands1" class="character"></div>
+								<div id="Downright-diagonal-walk2" class="character"></div>
+								<div id="Downright-diagonal-stands2" class="character"></div>
+							</div>
+						</div>
+						<div id="Death-hero">
+							<div></div>
+							<div>
+								<div id="Death-hero1" class="character"></div>
+								<div id="Death-hero2" class="character"></div>
+								<div id="Death-hero3" class="character"></div>
+								<div id="Death-hero4" class="character"></div>
+								<div id="Death-hero5" class="character"></div>
+								<div id="Death-hero6" class="character" style="position: absolute; top: 40px;"></div>
+							</div>
+						</div>
+						<div id="Hero-blood-big">
+							<div></div>
+							<div>
+								<div id="Hero-blood-big1" class="hero_blood"></div>
+								<div id="Hero-blood-big2" class="hero_blood"></div>
+								<div id="Hero-blood-big3" class="hero_blood"></div>
+								<div id="Hero-blood-big4" class="hero_blood"></div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- Удары героя -->
+					<div id="Hero-strikes">
+						<div id="Simple-strike">
+							<div id="Simple-strike1" class="character" time-frame="50"></div>
+							<div id="Simple-strike2" class="character" time-frame="50"></div>
+							<div id="Simple-strike3" class="character" time-frame="50"></div>
+							<div id="Simple-strike4" class="character" time-frame="100"></div>
+							<div id="Simple-strike5" class="character" time-frame="50"></div>
+							<div id="Simple-strike6" class="character" time-frame="0"></div>
+							<div id="Simple-strike7" class="character" time-frame="50"></div>
+						</div>
+						<div id="Fireball-strike">
+							<div id="Fireball-strike1" class="character" time-frame="250"></div>
+							<div id="Fireball-strike2" class="character" time-frame="100"></div>
+						</div>
+						<div id="Charge-strike">
+							<div id="Charge-strike1" class="character" time-frame="15"></div>
+							<div id="Charge-strike2" class="character" time-frame="15"></div>
+							<div id="Charge-strike3" class="character" time-frame="200"></div>
+						</div>
+						<div id="Icelance-strike">
+							<div id="Icelance-strike1" class="character" time-frame="250"></div>
+							<div id="Icelance-strike2" class="character" time-frame="100"></div>
+						</div>
+					</div>
+
+					<!-- Способности героя -->
+					<div id="Hero-skills">
+						<div id="Rage">
+							<div id="Rage1" class="character" time-frame="125"></div>
+							<div id="Rage2" class="character" time-frame="125"></div>
+							<div id="Rage3" class="character" time-frame="125"></div>
+							<div id="Rage4" class="character" time-frame="500"></div>
+						</div>
+						<div id="Regen">
+							<div id="Regen1" class="character" time-frame="125"></div>
+							<div id="Regen2" class="character" time-frame="125"></div>
+							<div id="Regen3" class="character" time-frame="125"></div>
+							<div id="Regen4" class="character" time-frame="125"></div>
+							<div id="Regen5" class="character" time-frame="125"></div>
+						</div>
+					</div>
+
+
+
+
+				</div>
+
+				<!-- Эффекты от способностей героя -->
+				<div id="Hero-effects">
+					<div id="Fireball">
+						<div id="Fireball1" class="effect"></div>
+						<div id="Fireball2" class="effect"></div>
+					</div>
+					<div id="Explosion">
+						<div id="Explosion1" class="effect"></div>
+						<div id="Explosion2" class="effect"></div>
+						<div id="Explosion3" class="effect"></div>
+					</div>
+					<div id="Fierytrail">
+						<div id="Fierytrail1" class="effect"></div>
+						<div id="Fierytrail2" class="effect"></div>
+					</div>
+					<div id="Soullink">
+						<div id="Soullink1" class="effect"></div>
+					</div>
+					<div id="Icelance">
+						<div id="Icelance1" class="effect"></div>
+						<div id="Icelance2" class="effect"></div>
+					</div>
+				</div>
+
+
+				<!-- Существа -->
+				<div id="Creatures">
+					
+					<!-- Класс моп -->
+					<div id="ClassMop"></div>
+					<div id="Mop">
+							
+						<div id="Stand">
+							<div id="Stands" class="monster"></div>
+						</div>
+
+						<div id="Walk" class="walk">
+							<div id="Walk1" class="monster"></div>
+							<div id="Walk2" class="monster"></div>
+						</div>
+
+						<div id="StrikeR">
+							<div id="Strike1R" class="monster"></div>
+							<div id="Strike2R" class="monster"></div>
+							<div id="Strike3R" class="monster"></div>
+						</div>
+						<div id="StrikeL">
+							<div id="Strike1L" class="monster"></div>
+							<div id="Strike2L" class="monster"></div>
+							<div id="Strike3L" class="monster"></div>
+						</div>
+						<div id="PushR">
+							<div id="PushR1" class="monster"></div>
+						</div>
+						<div id="PushL">
+							<div id="PushL1" class="monster"></div>
+						</div>
+						<div id="Death">
+							<div id="Death1" class="monster"></div>
+							<div id="Death2" class="monster"></div>
+							<div id="Death3" class="monster"></div>
+						</div>
+						<div id="Blood">
+							<div id="Blood1" class="mop_blood"></div>
+							<div id="Blood2" class="mop_blood"></div>
+							<div id="Blood3" class="mop_blood"></div>
+							<div id="Blood4" class="mop_blood"></div>
+						</div>
+
+					</div>
+
+
+					<!-- Класс арий -->
+					<div id="ClassArrey"></div>
+					<div id="Arrey">
+							
+						<div id="Stand">
+							<div id="Stands" class="monster"></div>
+						</div>
+
+						<div id="Moveup" class="walk">
+							<div id="Moveup1" class="monster"></div>
+							<div id="Moveup2" class="monster"></div>
+						</div>
+
+						<div id="Movedown" class="walk">
+							<div id="Movedown1" class="monster"></div>
+							<div id="Movedown2" class="monster"></div>
+						</div>
+
+						<div id="Moveleft" class="walk">
+							<div id="Moveleft1" class="monster"></div>
+							<div id="Moveleft2" class="monster"></div>
+						</div>
+
+						<div id="Moveright" class="walk">
+							<div id="Moveright1" class="monster"></div>
+							<div id="Moveright2" class="monster"></div>
+						</div>
+
+						<div id="StrikeR">
+							<div id="StrikeR1" class="monster"></div>
+							<div id="StrikeR2" class="monster"></div>
+						</div>
+
+						<div id="StrikeL">
+							<div id="StrikeL1" class="monster"></div>
+							<div id="StrikeL2" class="monster"></div>
+						</div>
+
+						<div id="PushL">
+							<div id="PushL1" class="monster"></div>
+						</div>
+
+						<div id="PushR">
+							<div id="PushR1" class="monster"></div>		
+						</div>
+
+						<div id="Sprintup" class="walk">
+							<div id="Sprintup1" class="monster"></div>
+							<div id="Sprintup2" class="monster"></div>
+						</div>
+
+						<div id="Sprintdown" class="walk">
+							<div id="Sprintdown1" class="monster"></div>
+							<div id="Sprintdown2" class="monster"></div>
+						</div>
+
+						<div id="Sprintleft" class="walk">
+							<div id="Sprintleft1" class="monster"></div>
+							<div id="Sprintleft2" class="monster"></div>
+						</div>
+
+						<div id="Sprintright" class="walk">
+							<div id="Sprintright1" class="monster"></div>
+							<div id="Sprintright2" class="monster"></div>
+						</div>
+
+						<div id="Jumpup">	
+							<div id="Jumpup1" class="monster" time-frame="800"></div>
+							<div id="Jumpup2" class="monster" time-frame="800"></div>
+						</div>
+
+						<div id="Jumpdown">
+							<div id="Jumpdown1" class="monster" time-frame="800"></div>
+							<div id="Jumpdown2" class="monster" time-frame="800"></div>
+						</div>
+
+						<div id="Jumpleft">
+							<div id="Jumpleft1" class="monster" time-frame="800"></div>
+							<div id="Jumpleft2" class="monster" time-frame="800"></div>
+						</div>
+
+						<div id="Jumpright">
+							<div id="Jumpright1" class="monster" time-frame="800"></div>
+							<div id="Jumpright2" class="monster" time-frame="800"></div>
+						</div>
+
+						<div id="Death">
+							<div id="Death1" class="monster"></div>
+							<div id="Death2" class="monster"></div>
+							<div id="Death3" class="monster"></div>
+							<div id="Death4" class="monster"></div>
+						</div>
+
+						<div id="Blood">
+							<div id="Blood1" class="arrey_blood"></div>
+							<div id="Blood2" class="arrey_blood"></div>
+							<div id="Blood3" class="arrey_blood"></div>
+							<div id="Blood4" class="arrey_blood"></div>
+						</div>
+
+					</div>
+
+					<div id="Warrior"></div>
+				</div>
+
+					
+				<!-- Неподвижные объекты -->
+				<div id="Static-objects"></div>
+
+
+				<!-- физические радиусы -->
+				<div id="PhysicRectangle"></div>
+				<div id="PhysicCircle"></div>
+
+			</div>
+
+
+		</div>
+
+		
+
+		
+	</body>
+</html>
